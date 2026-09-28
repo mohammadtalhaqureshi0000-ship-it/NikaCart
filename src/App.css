@@ -1,0 +1,213 @@
+@import "tailwindcss";
+
+/* ============================= */
+/* LETTER JUMP ANIMATION */
+/* ============================= */
+
+.letter-jump {
+  display: inline-block;
+  animation: letterJump 1.5s ease-in-out infinite;
+}
+
+@keyframes letterJump {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+/* ============================= */
+/* SUN BOUNCE ANIMATION */
+/* ============================= */
+
+.sun-bounce {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.sun-bounce:hover {
+  animation: sunBounce 0.8s ease-in-out infinite;
+}
+
+@keyframes sunBounce {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(-12px) scale(1.2);
+  }
+}
+
+/* ============================= */
+/* 3D CARD CONTAINER */
+/* ============================= */
+
+.card-3d-container {
+  perspective: 1200px;
+  padding: 25px 10px 45px;
+}
+
+/* ============================= */
+/* CARD 3D TRANSFORMATION */
+/* ============================= */
+
+.card-3d-depth {
+  position: relative;
+  height: 100%;
+  transform-style: preserve-3d;
+
+  transform:
+    rotateX(8deg)
+    rotateY(-8deg)
+    rotateZ(-2deg);
+
+  filter: drop-shadow(
+    10px 16px 12px rgba(51, 65, 85, 0.22)
+  );
+
+  transition:
+    transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
+    filter 0.5s ease;
+}
+
+.card-3d-container:hover .card-3d-depth {
+  transform:
+    translateY(-10px)
+    rotateX(0deg)
+    rotateY(0deg)
+    rotateZ(0deg);
+
+  filter: drop-shadow(
+    0 22px 18px rgba(14, 165, 233, 0.25)
+  );
+}
+
+/* ============================= */
+/* LAYERED 3D EDGES */
+/* ============================= */
+
+.card-3d-depth::before,
+.card-3d-depth::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  pointer-events: none;
+}
+
+.card-3d-depth::before {
+  background: #7dd3fc;
+
+  transform: translate3d(
+    7px,
+    10px,
+    -8px
+  );
+}
+
+.card-3d-depth::after {
+  background: #bae6fd;
+
+  transform: translate3d(
+    4px,
+    6px,
+    -4px
+  );
+}
+
+/* ============================= */
+/* MAIN PRODUCT CARD */
+/* ============================= */
+
+.wave-card {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  backface-visibility: hidden;
+}
+
+/* ============================= */
+/* PRODUCT IMAGE ANIMATION */
+/* ============================= */
+
+.wave-card img {
+  transition:
+    transform 0.7s ease,
+    filter 0.5s ease;
+}
+
+.card-3d-container:hover .wave-card img {
+  transform: scale(1.08);
+  filter: brightness(1.05);
+}
+
+/* ============================= */
+/* CARD HOVER EFFECTS */
+/* ============================= */
+
+.wave-card button {
+  transition:
+    transform 0.3s ease,
+    background-color 0.3s ease,
+    color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.card-3d-container:hover .wave-card {
+  border-color: #7dd3fc;
+}
+
+/* ============================= */
+/* RESPONSIVE */
+/* ============================= */
+
+@media (max-width: 640px) {
+  .card-3d-container {
+    padding: 15px 5px 30px;
+  }
+
+  .card-3d-depth {
+    transform:
+      rotateX(5deg)
+      rotateY(-4deg)
+      rotateZ(-1deg);
+  }
+
+  .card-3d-container:hover .card-3d-depth {
+    transform:
+      translateY(-5px)
+      rotateX(0deg)
+      rotateY(0deg)
+      rotateZ(0deg);
+  }
+}
+
+/* ============================= */
+/* REDUCED MOTION */
+/* ============================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .letter-jump,
+  .sun-bounce:hover {
+    animation: none;
+  }
+
+  .card-3d-depth,
+  .wave-card img,
+  .wave-card button {
+    transition: none;
+  }
+
+  .card-3d-depth,
+  .card-3d-container:hover .card-3d-depth {
+    transform: none;
+  }
+}
