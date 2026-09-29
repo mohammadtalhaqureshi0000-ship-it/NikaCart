@@ -24,6 +24,7 @@ import Profile from "./pages/Profile";
 
 import ProtectedRoute from "./componants/ProtectedRoute";
 import AdminRoute from "./componants/AdminRoute";
+import RootLayout from "./componants/RootLayout";
 
 import AdminLayout from "./componants/AdminLayout";
 import Dashboard from "./pages/Dashboard";
@@ -33,104 +34,113 @@ import AdminCustomers from "./pages/AdminCustomers";
 
 const router = createBrowserRouter([
   {
-    path: "/welcome",
-    element: <Welcome />,
-  },
+    element: <RootLayout />,
 
-  {
-    path: "/login",
-    element: <Login />,
-  },
-
-  {
-    path: "/register",
-    element: <Register />,
-  },
-
-  {
-    element: <ProtectedRoute />,
     children: [
       {
-        path: "/",
-        element: <Home />,
+        path: "/welcome",
+        element: <Welcome />,
       },
 
       {
-        path: "/products",
-        element: <Products />,
+        path: "/login",
+        element: <Login />,
       },
 
       {
-        path: "/products/:id",
-        element: <ProductDetails />,
+        path: "/register",
+        element: <Register />,
       },
 
       {
-        path: "/cart",
-        element: <Cart />,
-      },
+        element: <ProtectedRoute />,
 
-      {
-        path: "/wishlist",
-        element: <Wishlist />,
-      },
-
-      {
-        path: "/checkout",
-        element: <Checkout />,
-      },
-
-      {
-        path: "/order-confirmation/:id",
-        element: <OrderConfirmation />,
-      },
-
-      {
-        path: "/orders",
-        element: <Orders />,
-      },
-
-      {
-        path: "/profile",
-        element: <Profile />,
-      },
-    ],
-  },
-
-  {
-    element: <AdminRoute />,
-    children: [
-      {
-        path: "/admin",
-        element: <AdminLayout />,
         children: [
           {
-            index: true,
-            element: <Dashboard />,
+            path: "/",
+            element: <Home />,
           },
 
           {
-            path: "products",
-            element: <AdminProducts />,
+            path: "/products",
+            element: <Products />,
           },
 
           {
-            path: "orders",
-            element: <AdminOrders />,
+            path: "/products/:id",
+            element: <ProductDetails />,
           },
 
           {
-            path: "customers",
-            element: <AdminCustomers />,
+            path: "/cart",
+            element: <Cart />,
+          },
+
+          {
+            path: "/wishlist",
+            element: <Wishlist />,
+          },
+
+          {
+            path: "/checkout",
+            element: <Checkout />,
+          },
+
+          {
+            path: "/order-confirmation/:id",
+            element: <OrderConfirmation />,
+          },
+
+          {
+            path: "/orders",
+            element: <Orders />,
+          },
+
+          {
+            path: "/profile",
+            element: <Profile />,
           },
         ],
       },
-    ],
-  },
 
-  {
-    path: "*",
-    element: <Navigate to="/welcome" replace />,
+      {
+        element: <AdminRoute />,
+
+        children: [
+          {
+            path: "/admin",
+            element: <AdminLayout />,
+
+            children: [
+              {
+                index: true,
+                element: <Dashboard />,
+              },
+
+              {
+                path: "products",
+                element: <AdminProducts />,
+              },
+
+              {
+                path: "orders",
+                element: <AdminOrders />,
+              },
+
+              {
+                path: "customers",
+                element: <AdminCustomers />,
+              },
+            ],
+          },
+        ],
+      },
+
+      {
+        path: "*",
+        element: <Navigate to="/welcome" replace />,
+      },
+    ],
   },
 ]);
 
